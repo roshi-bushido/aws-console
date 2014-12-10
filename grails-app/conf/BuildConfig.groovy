@@ -48,9 +48,18 @@ grails.project.dependency.resolution = {
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
-        // runtime 'mysql:mysql-connector-java:5.1.29'
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
+        runtime 'mysql:mysql-connector-java:5.1.29'
+
+        compile 'com.google.code.gson:gson:2.2.2'
+        compile 'joda-time:joda-time:2.0'
+
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
+        test 'org.hamcrest:hamcrest-all:1.3'
+        test 'org.codehaus.groovy.modules.http-builder:http-builder:0.6'
+        test 'org.spockframework:spock-grails-support:0.7-groovy-2.0'
+        test "org.gebish:geb-spock:0.9.0"
+
     }
 
     plugins {
@@ -67,6 +76,11 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
         runtime ':twitter-bootstrap:3.3.1'
+
+        test ":geb:0.7.2"
+        test(":spock:0.7") {
+            exclude "spock-grails-support"
+        }
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"
