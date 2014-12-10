@@ -117,3 +117,6 @@ log4j.main = {
 }
 
 grails.plugins.twitterbootstrap.fixtaglib = true
+
+grails.plugin.awssdk.accessKey = {AWS_CLIENT_ID}
+grails.plugin.awssdk.secretKey = {AWS_CLIENT_SECRET}
