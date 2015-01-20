@@ -9,6 +9,6 @@ class BaseController {
     private def gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create()
 
     public void renderJSON(Object o) {
-        render gson.toJson(o)
+        render(text: gson.toJson(o), contentType: "application/json")
     }
 }
