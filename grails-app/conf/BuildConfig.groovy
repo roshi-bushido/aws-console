@@ -34,16 +34,13 @@ grails.project.dependency.resolution = {
 
     repositories {
         inherits true // Whether to inherit repository definitions from plugins
-
         grailsPlugins()
         grailsHome()
         mavenLocal()
         grailsCentral()
         mavenCentral()
-        // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenRepo "http://central.maven.org/maven2/"
+        mavenRepo "http://repo.spring.io/milestone"
     }
 
     dependencies {
@@ -64,7 +61,6 @@ grails.project.dependency.resolution = {
         build 'org.apache.httpcomponents:httpclient:4.2'
         runtime 'org.apache.httpcomponents:httpcore:4.2'
         runtime 'org.apache.httpcomponents:httpclient:4.2'
-
     }
 
     plugins {
@@ -73,15 +69,18 @@ grails.project.dependency.resolution = {
 
         // plugins for the compile step
         compile ":scaffolding:2.1.2"
-        compile ':cache:1.1.7'
+        compile ":cache:1.1.7"
         compile ":asset-pipeline:1.9.6"
+
+        compile ":spring-security-core:2.0-RC4"
+        compile ":spring-security-ldap:2.0-RC2"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.5.5" // or ":hibernate:3.6.10.17"
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
-        runtime ':twitter-bootstrap:3.3.1'
-        runtime ':aws-sdk:1.9.9.1'
+        runtime ":twitter-bootstrap:3.3.1"
+        runtime ":aws-sdk:1.9.9.1"
 
         test ":geb:0.7.2"
         test(":spock:0.7") {
