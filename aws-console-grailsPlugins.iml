@@ -7,7 +7,6 @@
           <root url="file://$MODULE_DIR$/target/work/plugins/database-migration-1.4.0/grails-app/views" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.1/web-app" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/twitter-bootstrap-3.3.1/web-app" relative="/" />
-          <root url="file://$MODULE_DIR$/target/work/plugins/spring-security-core-2.0-RC4/grails-app/views" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -54,14 +53,6 @@
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/scaffolding-2.1.2/src/groovy" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/spock-0.7" />
-    <content url="file://$MODULE_DIR$/target/work/plugins/spring-security-core-2.0-RC4">
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/spring-security-core-2.0-RC4/src/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/spring-security-core-2.0-RC4/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/spring-security-core-2.0-RC4/grails-app/i18n" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/spring-security-core-2.0-RC4/grails-app/controllers" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/spring-security-core-2.0-RC4/grails-app/services" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/spring-security-core-2.0-RC4/grails-app/taglib" isTestSource="false" />
-    </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/tomcat-7.0.55">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/tomcat-7.0.55/src/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/tomcat-7.0.55/src/groovy" isTestSource="false" />
@@ -79,7 +70,11 @@
     <orderEntry type="module-library" exported="">
       <library name="Grails User Library (aws-console-grailsPlugins)">
         <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/2.7/joda-time-2.7.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/javassist/javassist/3.17.1-GA/javassist-3.17.1-GA.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.2.2/gson-2.2.2.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk-config/1.9.9/aws-java-sdk-config-1.9.9.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk/1.9.9/aws-java-sdk-1.9.9.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/liquibase/liquibase-core/2.0.5/liquibase-core-2.0.5.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar!/" />
@@ -99,36 +94,10 @@
           <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/classmate/1.0.0/classmate-1.0.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-validator/5.0.3.Final/hibernate-validator-5.0.3.Final.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/mozilla/rhino/1.7R4/rhino-1.7R4.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-test-support/1.0-grails-2.4/grails-datastore-test-support-1.0-grails-2.4.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/7.0.55/tomcat-embed-core-7.0.55.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/jdt/core/compiler/ecj/3.7.2/ecj-3.7.2.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-websocket/7.0.55/tomcat-embed-websocket-7.0.55.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-logging-log4j/7.0.55/tomcat-embed-logging-log4j-7.0.55.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-el/7.0.55/tomcat-embed-el-7.0.55.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-jasper/7.0.55/tomcat-embed-jasper-7.0.55.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-catalina-ant/7.0.55/tomcat-catalina-ant-7.0.55.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.2.2/gson-2.2.2.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.29/mysql-connector-java-5.1.29.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/groovy/modules/http-builder/http-builder/0.6/http-builder-0.6.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-all/1.3/hamcrest-all-1.3.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/gebish/geb-implicit-assertions/0.9.0/geb-implicit-assertions-0.9.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/gebish/geb-ast/0.9.0/geb-ast-0.9.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/gebish/geb-core/0.9.0/geb-core-0.9.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/gebish/geb-spock/0.9.0/geb-spock-0.9.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/spockframework/spock-grails-support/0.7-groovy-2.0/spock-grails-support-0.7-groovy-2.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/xml-resolver/xml-resolver/1.2/xml-resolver-1.2.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/xerces/xercesImpl/2.9.1/xercesImpl-2.9.1.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/net/sourceforge/nekohtml/nekohtml/1.9.16/nekohtml-1.9.16.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/groovy/groovy/2.3.6/groovy-2.3.6.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/net/sf/ezmorph/ezmorph/1.0.6/ezmorph-1.0.6.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.8.0/commons-beanutils-1.8.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/net/sf/json-lib/json-lib/2.3/json-lib-2.3-jdk15.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.2/httpclient-4.2.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.2/httpcore-4.2.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk-config/1.9.9/aws-java-sdk-config-1.9.9.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk/1.9.9/aws-java-sdk-1.9.9.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.29/mysql-connector-java-5.1.29.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk-iam/1.9.9/aws-java-sdk-iam-1.9.9.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk-route53/1.9.9/aws-java-sdk-route53-1.9.9.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk-ses/1.9.9/aws-java-sdk-ses-1.9.9.jar!/" />
@@ -173,9 +142,29 @@
           <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.3.0/jackson-annotations-2.3.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.3.2/jackson-databind-2.3.2.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk-core/1.9.9/aws-java-sdk-core-1.9.9.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/2.7/joda-time-2.7.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/3.2.3.RELEASE/spring-security-web-3.2.3.RELEASE.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/3.2.3.RELEASE/spring-security-core-3.2.3.RELEASE.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.8.0/commons-beanutils-1.8.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/net/sf/json-lib/json-lib/2.3/json-lib-2.3-jdk15.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/groovy/modules/http-builder/http-builder/0.6/http-builder-0.6.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-all/1.3/hamcrest-all-1.3.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-test-support/1.0-grails-2.4/grails-datastore-test-support-1.0-grails-2.4.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/gebish/geb-implicit-assertions/0.9.0/geb-implicit-assertions-0.9.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/gebish/geb-ast/0.9.0/geb-ast-0.9.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/gebish/geb-core/0.9.0/geb-core-0.9.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/gebish/geb-spock/0.9.0/geb-spock-0.9.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/spockframework/spock-grails-support/0.7-groovy-2.0/spock-grails-support-0.7-groovy-2.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/xml-resolver/xml-resolver/1.2/xml-resolver-1.2.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/xerces/xercesImpl/2.9.1/xercesImpl-2.9.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/net/sourceforge/nekohtml/nekohtml/1.9.16/nekohtml-1.9.16.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/groovy/groovy/2.3.6/groovy-2.3.6.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/net/sf/ezmorph/ezmorph/1.0.6/ezmorph-1.0.6.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/7.0.55/tomcat-embed-core-7.0.55.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/jdt/core/compiler/ecj/3.7.2/ecj-3.7.2.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-websocket/7.0.55/tomcat-embed-websocket-7.0.55.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-logging-log4j/7.0.55/tomcat-embed-logging-log4j-7.0.55.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-el/7.0.55/tomcat-embed-el-7.0.55.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-jasper/7.0.55/tomcat-embed-jasper-7.0.55.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-catalina-ant/7.0.55/tomcat-catalina-ant-7.0.55.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

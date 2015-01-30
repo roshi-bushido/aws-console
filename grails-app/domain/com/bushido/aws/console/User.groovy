@@ -1,49 +1,30 @@
 package com.bushido.aws.console
 
 class User {
-	transient springSecurityService
-
 	String username
 	String password
-	boolean enabled = true
-	boolean accountExpired
-	boolean accountLocked
-	boolean passwordExpired
-
-	static transients = ['springSecurityService']
+    String awsClientId
+    String awsClientSecret
+    String ldapUserId
+	boolean hasAWSConfiguration = false
 
 	static constraints = {
-		username blank: false, unique: true
-		password blank: false
+		username blank: false, unique: true, nullable: false
+		password blank: false, nullable: false
+        awsClientId unique: true, nullable: true
+        awsClientSecret nullable: true
+        ldapUserId unique: true, nullable: true
 	}
 
 	static mapping = {
-        table("Users")
+        table("users")
         version false
-		password column: '`password`'
-        enabled  column: '`is_enabled`'
-
-        accountExpired column: '`account_expired`'
-        accountLocked column: '`account_locked`'
-        passwordExpired column: '`password_expired`'
-
+        username            column: 'username'
+		password            column: 'password'
+        ldapUserId          column: 'ldap_user_id'
+        awsClientId         column: 'aws_client_id'
+        awsClientSecret     column: 'aws_client_secret'
+        hasAWSConfiguration column: 'has_aws_configuration'
 	}
 
-	Set<Role> getAuthorities() {
-		UserRole.findAllByUser(this).collect { it.role }
-	}
-
-	def beforeInsert() {
-		encodePassword()
-	}
-
-	def beforeUpdate() {
-		if (isDirty('password')) {
-			encodePassword()
-		}
-	}
-
-	protected void encodePassword() {
-		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
-	}
 }

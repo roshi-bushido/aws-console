@@ -1,4 +1,4 @@
-package aws.console
+package com.bushido.aws.console
 
 import com.google.gson.GsonBuilder
 

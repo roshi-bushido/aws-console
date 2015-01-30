@@ -1,60 +1,46 @@
-DROP TABLE UserRoles;
-DROP TABLE Roles;
-DROP TABLE Users;
+DROP TABLE user_roles;
+DROP TABLE roles;
+DROP TABLE users;
 
-CREATE TABLE `Roles` (
+CREATE TABLE `roles` (
   `id`        BIGINT(20)   NOT NULL AUTO_INCREMENT,
-  `authority` VARCHAR(255) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB;
 
-# CREATE TABLE `Users` (
-#   `id`                     BIGINT(20)   NOT NULL AUTO_INCREMENT,
-#   `account_expired`        BIT(1)       NOT NULL,
-#   `account_locked`         BIT(1)       NOT NULL,
-#   `creation_date`          DATETIME     NOT NULL,
-#   `is_enabled`             BIT(1)       NOT NULL,
-#   `firstname`              VARCHAR(255) NOT NULL,
-#   `lastname`               VARCHAR(255) NOT NULL,
-#   `last_modification_date` DATETIME     NOT NULL,
-#   `password`               VARCHAR(255) NOT NULL,
-#   `password_expired`       BIT(1)       NOT NULL,
-#   `username`               VARCHAR(255) NOT NULL,
-#   PRIMARY KEY (`id`)
-# )
-#   ENGINE = InnoDB;
-
-CREATE TABLE `Users` (
+CREATE TABLE `users` (
   `id`                     BIGINT(20)   NOT NULL AUTO_INCREMENT,
-  `account_expired`        BIT(1)       NULL,
-  `account_locked`         BIT(1)       NULL,
-  `creation_date`          DATETIME     NULL,
-  `is_enabled`             BIT(1)       NULL,
-  `firstname`              VARCHAR(255) NULL,
-  `lastname`               VARCHAR(255) NULL,
-  `last_modification_date` DATETIME     NULL,
-  `password`               VARCHAR(255) NULL,
-  `password_expired`       BIT(1)       NULL,
   `username`               VARCHAR(255) NULL,
+  `password`               VARCHAR(255) NULL,
+  `aws_client_id`          VARCHAR(255) NULL,
+  `aws_client_secret`      VARCHAR(1024) NULL,
+  `has_aws_configuration`  BIT(1) NOT NULL DEFAULT 0,
+  `ldap_user_id`           VARCHAR(1024) NULL,
+  `creation_date`          DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_modification_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB;
 
-CREATE TABLE `UserRoles` (
+CREATE TABLE `user_roles` (
   `role_id` BIGINT(20) NOT NULL,
   `user_id` BIGINT(20) NOT NULL,
   PRIMARY KEY (`role_id`, `user_id`)
 )
   ENGINE = InnoDB;
-ALTER TABLE UserRoles ADD CONSTRAINT `FK_USER_ROLES_USER` FOREIGN KEY (user_id) REFERENCES Users (id);
-ALTER TABLE UserRoles ADD CONSTRAINT `FK_USER_ROLES_ROLE` FOREIGN KEY (role_id) REFERENCES Roles (id);
+ALTER TABLE user_roles ADD CONSTRAINT `FK_USER_ROLES_USER` FOREIGN KEY (user_id) REFERENCES users (id);
+ALTER TABLE user_roles ADD CONSTRAINT `FK_USER_ROLES_ROLE` FOREIGN KEY (role_id) REFERENCES roles (id);
+delete from user_roles;
+delete from roles;
+delete from users;
 
+insert into roles values (1, 'ROLE_ADMIN');
+insert into roles values (2, 'ROLE_USER');
 
+INSERT INTO users (`id`, `aws_client_id`, `aws_client_secret`, `has_aws_configuration`, `ldap_user_id`, `password`, `username`)
+VALUES (1, 1, 1, 0, 1, 'admin', 'admin');
 
-INSERT INTO Roles VALUES (1, 'ROLE_ADMIN');
-INSERT INTO Roles VALUES (2, 'ROLE_USER');
-INSERT INTO Users VALUES (1,0 ,0, '2013-03-14 14:27:57',1, 'admin', 'admin', '2013-03-14 14:27:57', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918',0, 'admin');
-INSERT INTO Users VALUES (2,0 ,0, '2013-03-14 14:27:58',1, 'user', 'user', '2013-03-14 14:27:58', '04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb',0, 'user');
-INSERT INTO UserRoles VALUES (1, 1);
-INSERT INTO UserRoles VALUES (2, 2);
+insert into user_roles (role_id, user_id) values (1,1);
+insert into user_roles (role_id, user_id) values (2,1);
+

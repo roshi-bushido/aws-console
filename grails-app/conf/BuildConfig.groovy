@@ -13,9 +13,9 @@ grails.project.fork = [
 
 //    // configure settings for the test-app JVM, uses the daemon by default
 //    test: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon: false],
-    run:  [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
+//    run:  [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
     test: false,
-//    run: false,
+    run: false,
     war: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
     // configure settings for the Console UI JVM
     console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
@@ -71,9 +71,6 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.1.2"
         compile ":cache:1.1.7"
         compile ":asset-pipeline:1.9.6"
-
-        compile ":spring-security-core:2.0-RC4"
-//        compile ":spring-security-ldap:2.0-RC2"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.5.5" // or ":hibernate:3.6.10.17"

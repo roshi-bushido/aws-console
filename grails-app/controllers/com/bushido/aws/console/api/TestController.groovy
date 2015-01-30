@@ -1,11 +1,13 @@
-package aws.console
+package com.bushido.aws.console.api
 
-import org.springframework.security.access.annotation.Secured;
+import com.bushido.aws.console.BaseController
+import com.bushido.aws.console.User
+import com.bushido.aws.console.annotations.Secured
 
-@Secured(['ROLE_ADMIN'])
 class TestController extends BaseController {
     def amazonWebService
 
+    @Secured(roles=['ROLE_ADMIN'])
     def index() {
         def ec2 = this.amazonWebService.getEc2()
         def instanceList = new ArrayList()
@@ -13,6 +15,11 @@ class TestController extends BaseController {
             instanceList.addAll(reservation.getInstances())
         }
         renderJSON(instanceList)
+    }
+
+    def login() {
+        def user = User.findByUsername("admin")
+        request.getSession(true).setAttribute("user", user)
     }
 
     def user() {

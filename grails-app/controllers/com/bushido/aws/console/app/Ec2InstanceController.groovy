@@ -1,7 +1,8 @@
-package aws.console
+package com.bushido.aws.console.app
 
 
 import static org.springframework.http.HttpStatus.*
+import aws.console.Ec2Instance;
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)

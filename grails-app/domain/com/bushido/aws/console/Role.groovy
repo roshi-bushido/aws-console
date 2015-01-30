@@ -1,16 +1,21 @@
 package com.bushido.aws.console
 
 class Role {
-
-	String authority
+	String name
 
 	static mapping = {
-        table("Roles")
+        table("roles")
 		cache true
         version false
+        name column: 'name', unique: true
 	}
 
 	static constraints = {
-		authority blank: false, unique: true
+		name blank: false, unique: true
 	}
+
+
+    static Collection<Role> getRolesByName(List<String> roleNames) {
+        return Role.findAllByNameInList(roleNames);
+    }
 }
