@@ -1,5 +1,8 @@
 package aws.console
 
+import org.springframework.security.access.annotation.Secured;
+
+@Secured(['ROLE_ADMIN'])
 class TestController extends BaseController {
     def amazonWebService
 
