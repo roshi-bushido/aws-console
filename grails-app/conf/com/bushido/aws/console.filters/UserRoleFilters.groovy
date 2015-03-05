@@ -2,9 +2,7 @@ package com.bushido.aws.console.filters
 
 import com.bushido.aws.console.Role
 import com.bushido.aws.console.User
-import com.bushido.aws.console.UserRole
 import com.bushido.aws.console.annotations.Secured
-import com.bushido.aws.console.utils.SessionName
 import org.apache.commons.lang.WordUtils
 
 class UserRoleFilters {
@@ -45,17 +43,14 @@ class UserRoleFilters {
                         }
 
                         def domainRoles = Role.getRolesByName(roles);
-                        def user = session['user']
+                        User user = (User)session['user']
                         if (user) {
-                            def userRoles = UserRole.findAllByUser(user)
-                            def userRolesNames = userRoles.collectNested { it.role.name }
-
+                            def userRolesNames = user.roles.collectNested { it.name }
                             domainRoles.each { domainRole ->
                                 if (!userRolesNames.contains(domainRole.getName())) {
                                     isAuthorized = false
                                 }
                             }
-
                             if (!isAuthorized) {
                                 redirect(controller: "login", action: "accessDenied")
                                 return
