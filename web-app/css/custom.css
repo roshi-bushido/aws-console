@@ -1,0 +1,77 @@
+/* Add here all your css styles (customizations) */
+.errorMessage {
+    color: #e74c3c;
+}
+.dropdown-menu-border {
+    border-color: #0b95d4;
+    border-width: 2px;
+}
+.fivePixelsRigth {
+    margin-right: 5px;
+}
+
+#logo-header {
+    width: 40%;
+}
+
+@media screen and (min-width: 767px) {
+  .header .navbar-default .navbar-nav > li > a {
+    padding-bottom: 0;
+    font-weight: 800;
+    font-size: 1em;
+  }
+}
+
+.loading {
+    background-image: url("../images/loader.gif");
+}
+
+.panel-blue {}
+
+
+.header .navbar-default {
+    border: none;
+    background: #323031;
+    z-index: 100;
+}
+
+.topbar {
+    z-index: 12;
+    padding: 8px 0;
+    position: relative;
+    background: #323031;
+}
+
+.header .navbar-default .navbar-nav > li > a {
+    color: #ffffff;
+}
+
+.topbar ul.loginbar > li > a, .topbar ul.loginbar > li > a:hover {
+    color: #40B4E5;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.topbar ul.loginbar > li > a, .topbar ul.loginbar > li > a:active {
+    color: #ffffff;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.header .navbar-default .navbar-nav > .open > a:focus, .header .navbar-default .navbar-nav > li > a:focus {
+    color: #40B4E5 !important;
+}.header .navbar-default .navbar-nav > .open > a:hover, .header .navbar-default .navbar-nav > li > a:hover {
+    color: #40B4E5 !important;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    margin-bottom: 10px;
+}
+
+.footer {
+    background: #323031;
+}
+
+.copyright {
+    background: #323031;
+}
