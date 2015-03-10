@@ -1,6 +1,7 @@
 package com.bushido.aws.console.app
 
 import com.bushido.aws.console.BaseController
+import com.bushido.aws.console.RegularInstance
 import com.bushido.aws.console.User
 import com.bushido.aws.console.annotations.Secured
 
@@ -8,7 +9,7 @@ import com.bushido.aws.console.annotations.Secured
 @Secured(roles=['ROLE_USER'])
 class UserController extends BaseController {
     def cloudService
-    static allowedMethods = [updateAwsConfiguration: "POST", index: "GET"]
+    static allowedMethods = [updateAwsConfiguration: "POST", index: "GET", myInstances: "GET", myWorkshops: "GET"]
 
     def index() {
         User user = this.getLoggedInUser()
@@ -22,8 +23,10 @@ class UserController extends BaseController {
     }
 
     def myInstances() {
-        def myInstancesModel = [instanceList: []]
-        render(view: "my_instances", model: myInstancesModel)
+        def owner = this.getLoggedInUser()
+        def instances = RegularInstance.findAllByOwner(owner)
+        def instancesCount = RegularInstance.countByOwner(owner)
+        render(view: "my_instances", model: [instances: instances, instancesCount: instancesCount])
         return
     }
 

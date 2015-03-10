@@ -32,23 +32,44 @@ ALTER TABLE user_roles ADD CONSTRAINT `FK_USER_ROLES_USER` FOREIGN KEY (user_id)
 ALTER TABLE user_roles ADD CONSTRAINT `FK_USER_ROLES_ROLE` FOREIGN KEY (role_id) REFERENCES roles (id);
 
 CREATE TABLE `purposes` (
-  `id` BIGINT(20) NOT NULL,
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
 CREATE TABLE `instance_types` (
-  `id` BIGINT(20) NOT NULL,
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `aws_instance_type` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
 CREATE TABLE `approved_amis` (
-  `id` BIGINT(20) NOT NULL,
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `aws_instance_id` varchar(255) NOT NULL,
   `is_workshop` BIT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
+
+CREATE TABLE `regular_instances` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `owner_id` BIGINT(20) NOT NULL,
+  `instance_type_id` BIGINT(20) NOT NULL,
+  `approved_ami_id` BIGINT(20) NOT NULL,
+  `purpose_id` BIGINT(20) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(1024) NOT NULL,
+  `state` varchar(100) NOT NULL,
+  `domain` varchar(256) NULL,
+  `sfdc_url` varchar(256) NULL,
+  `has_domain` BIT NOT NULL DEFAULT 0,
+  `has_eip` BIT NOT NULL DEFAULT 0,
+  `date_start` DATETIME NOT NULL,
+  `date_stop` DATETIME NOT NULL,
+  `date_terminate` DATETIME,
+  `date_creation` DATETIME NOT NULL,
+  `date_last_modification` DATETIME NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 

@@ -7,11 +7,11 @@
 <body>
 <div class="container content">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <!--Basic Table-->
             <div class="panel panel-dark-blue margin-bottom-40">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-tasks"></i> Basic Table</h3>
+                    <h3 class="panel-title"><i class="fa fa-tasks"></i>My Instances</h3>
                 </div>
                 <div class="panel-body">
                     <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
@@ -20,43 +20,42 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>First Name</th>
-                        <th class="hidden-sm">Last Name</th>
-                        <th>Username</th>
+                        <th>Name</th>
+                        <th class="hidden-sm">Type</th>
+                        <th>Purpose</th>
                         <th>Status</th>
+                        <th>Has EIP?</th>
+                        <th>Has Domain?</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td class="hidden-sm">Otto</td>
-                        <td>@mdo</td>
-                        <td><span class="label label-warning">Expiring</span></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td class="hidden-sm">Thornton</td>
-                        <td>@fat</td>
-                        <td><span class="label label-success">Success</span></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Larry</td>
-                        <td class="hidden-sm">the Bird</td>
-                        <td>@twitter</td>
-                        <td><span class="label label-danger">Error!</span></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>htmlstream</td>
-                        <td class="hidden-sm">Web Design</td>
-                        <td>@htmlstream</td>
-                        <td><span class="label label-info">Pending..</span></td>
-                    </tr>
+                        <g:each in="${instances}" var="instance" >
+                            <tr>
+                                <td>${instance.id}</td>
+                                <td>${instance.name}</td>
+                                <td>${instance.type.name}</td>
+                                <td>${instance.purpose.name}</td>
+                                <td>${instance.state.name}</td>
+                                <td>${instance.withElasticIP}</td>
+                                <td>${instance.withDomain}</td>
+                            </tr>
+                        </g:each>
                     </tbody>
                 </table>
+                <div class="panel-body" >
+                    <ul class="pagination col col-6">
+                        <li><a href="#">«</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">»</a></li>
+                    </ul>
+                    <div class="col col-6" style="float: right;margin: 20px 0">
+                        <g:link controller="instance" action="newInstance" class="btn-u right btn-u-green" style="float: right">Launch Instance</g:link>
+                    </div>
+                </div>
             </div>
             <!--End Basic Table-->
         </div>

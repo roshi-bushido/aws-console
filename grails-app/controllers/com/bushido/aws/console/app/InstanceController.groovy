@@ -10,7 +10,7 @@ import com.bushido.aws.console.commands.instances.InstanceRequestCommand
 
 @Secured(roles=['ROLE_USER'])
 class InstanceController extends BaseController {
-    def cloudService
+    def instanceService
     static allowedMethods = [createInstance: "POST", newInstance: "GET"]
 
     private static def getCreateInstanceModel() {
@@ -28,7 +28,7 @@ class InstanceController extends BaseController {
         cmd.withDomain = false
         cmd.withElasticIP = false
 
-        def model = InstanceController.getCreateInstanceModel()
+        def model = getCreateInstanceModel()
         model.put("instance", cmd)
         render(view: "create_instance", model: model)
         return
@@ -36,17 +36,15 @@ class InstanceController extends BaseController {
 
     def createInstance(InstanceRequestCommand cmd) {
         if (cmd.hasErrors()) {
-            def model = InstanceController.getCreateInstanceModel()
+            def model = getCreateInstanceModel()
             model.put("instance", cmd)
             render(view: "create_instance", model: model)
             return
         }
+        cmd.owner = this.getLoggedInUser()
+        this.instanceService.processCreateRequest(cmd)
+        redirect(controller: 'user', action: 'myInstances')
         return
     }
-
-//    def newWorkshop() {
-//        def model = []
-//        render(view: "create_instance", model: model)
-//    }
 
 }

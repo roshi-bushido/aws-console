@@ -104,6 +104,7 @@
                 </fieldset>
                 <footer>
                     <button type="submit" class="btn-u right" style="float: right">Create Instance</button>
+                    <g:link controller="user" action="myInstances" class="btn-u right btn-u-red" style="float: right; margin-right: 20px;">Cancel</g:link>
                 </footer>
             </g:form>
         </div>
