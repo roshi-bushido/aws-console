@@ -2,7 +2,7 @@ package com.bushido.aws.console
 
 import com.bushido.aws.console.domain.InstanceState
 
-class RegularInstance {
+class RegularInstance implements Serializable {
     Purpose purpose
     InstanceType type
     ApprovedAMI ami

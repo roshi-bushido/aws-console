@@ -51,6 +51,7 @@ grails.project.dependency.resolution = {
         compile 'com.google.code.gson:gson:2.2.2'
         compile 'joda-time:joda-time:2.0'
         compile 'org.apache.directory.api:api-all:1.0.0-M28'
+        compile 'org.apache.activemq:activemq-core:5.7.0'
 
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
         test 'org.hamcrest:hamcrest-all:1.3'
@@ -72,6 +73,7 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.1.2"
         compile ":cache:1.1.7"
         compile ":asset-pipeline:1.9.6"
+        compile ":jms:1.3"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.5.5" // or ":hibernate:3.6.10.17"

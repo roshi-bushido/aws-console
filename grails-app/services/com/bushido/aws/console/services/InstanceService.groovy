@@ -12,7 +12,9 @@ import java.text.SimpleDateFormat
 
 @Transactional
 class InstanceService {
-    private SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy")
+    def dateFormatter = new SimpleDateFormat("MM/dd/yyyy")
+    def jmsService
+
     def processCreateRequest(InstanceRequestCommand request) {
         def instances = new ArrayList<RegularInstance>()
 
@@ -34,6 +36,8 @@ class InstanceService {
             instance.terminationDate = instance.endingDate
             instance.save(failOnError: true, flush: true)
             instances.add(instance)
+
+            jmsService.send(queue: "awsQueue", instance, "standard", null)
         }
         return instances;
     }
