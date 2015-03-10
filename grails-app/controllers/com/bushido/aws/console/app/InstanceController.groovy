@@ -7,7 +7,6 @@ import com.bushido.aws.console.Purpose
 import com.bushido.aws.console.annotations.Secured
 import com.bushido.aws.console.commands.instances.InstanceRequestCommand
 
-
 @Secured(roles=['ROLE_USER'])
 class InstanceController extends BaseController {
     def instanceService

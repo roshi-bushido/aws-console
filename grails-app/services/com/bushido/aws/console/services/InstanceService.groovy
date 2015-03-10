@@ -37,7 +37,8 @@ class InstanceService {
             instance.save(failOnError: true, flush: true)
             instances.add(instance)
 
-            jmsService.send(queue: "awsQueue", instance, "standard", null)
+            def instanceCreationMessage = [regularInstanceId: instance.id]
+            jmsService.send(queue: "awsQueue", instanceCreationMessage)
         }
         return instances;
     }

@@ -18,6 +18,7 @@
 /stacktrace.log
 /test/reports
 /logs
+/activemq-data
 
 # project release file
 /*.war

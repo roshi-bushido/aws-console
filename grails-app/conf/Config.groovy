@@ -124,5 +124,5 @@ grails.plugins.twitterbootstrap.fixtaglib = true
 grails.ldap.host="ec2-54-69-45-44.us-west-2.compute.amazonaws.com"
 grails.ldap.port=389
 grails.ldap.baseCN="OU=Users,OU=Mulesoft,DC=dev,DC=mulesoft,DC=com"
-
+grails.activemq.url="tcp://localhost:61616"
 

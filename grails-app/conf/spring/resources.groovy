@@ -2,7 +2,9 @@ import org.apache.activemq.ActiveMQConnectionFactory
 
 // Place your Spring DSL code here
 beans = {
+    grailsApplication = ref('grailsApplication')
+
     jmsConnectionFactory(ActiveMQConnectionFactory) {
-        brokerURL = 'vm://localhost'
+        brokerURL = grailsApplication.config.grails.activemq.url
     }
 }
