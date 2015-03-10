@@ -26,7 +26,6 @@ class User {
         roles               lazy: false,  joinTable: [name: "user_roles", key: "user_id", column: "role_id"]
 	}
 
-
     def isAdmin() {
         roles.each {role ->
             if ('ROLE_ADMIN'.equalsIgnoreCase(role.name)) {

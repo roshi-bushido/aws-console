@@ -3,16 +3,16 @@ package com.bushido.aws.console.commands.instances
 import grails.validation.Validateable
 
 @Validateable
-class InstanceRequest {
+class InstanceRequestCommand {
     String purpose
-    String instanceId
+    String amiId
     Integer amount
     Boolean withElasticIP
     Boolean withDomain
     String domain
     String type
-    Date startingDate
-    Date endingDate
+    String startingDate
+    String endingDate
     String name
     String description
     String sfdcOpportunityLink

@@ -185,7 +185,6 @@
 <script type="text/javascript" src="${resource(dir: 'plugins', file:'jquery-migrate-1.2.1.min.js')}"></script>
 <script type="text/javascript" src="${resource(dir: 'plugins', file:'bootstrap/js/bootstrap.min.js')}"></script>
 <script type="text/javascript" src="${resource(dir: 'js', file:'app.js')}"></script>
-<script type="text/javascript" src="${resource(dir: 'js', file:'ui.js')}"></script>
 
 <!--[if lt IE 9]>
     <script type="text/javascript" src="${resource(dir: 'js', file:'plugins/respond.js')}"></script>

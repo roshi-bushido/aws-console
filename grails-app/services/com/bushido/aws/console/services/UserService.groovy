@@ -8,13 +8,12 @@ import grails.transaction.Transactional
 @Transactional
 class UserService {
 
+    @Transactional(readOnly = false)
     public User createUserWith(String username) {
-        User user = new User(username: username, hasAWSConfiguration: false)
-        user = user.save(failOnError: true, flush: true)
-
         Role role = Role.findByName("ROLE_USER");
-        UserRole userRole = new UserRole(user: user, role: role)
-        userRole.save(failOnError: true, flush: true)
+        User user = new User(username: username, hasAWSConfiguration: false)
+        user.roles.add(role)
+        user = user.save(failOnError: true, flush: true)
         return this.findUserById(user.id);
     }
 

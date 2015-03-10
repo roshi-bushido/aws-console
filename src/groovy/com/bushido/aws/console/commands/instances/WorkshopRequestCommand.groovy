@@ -7,7 +7,7 @@ import grails.validation.Validateable
  */
 
 @Validateable
-class WorkshopRequest {
+class WorkshopRequestCommand {
     String instanceId
     String sfdcOpportunityLink
     String namePreffix
