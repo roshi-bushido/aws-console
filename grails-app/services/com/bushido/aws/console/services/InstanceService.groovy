@@ -5,9 +5,12 @@ import com.bushido.aws.console.InstanceType
 import com.bushido.aws.console.Purpose
 import com.bushido.aws.console.RegularInstance
 import com.bushido.aws.console.commands.instances.InstanceRequestCommand
+import com.bushido.aws.console.domain.InstanceAction
 import com.bushido.aws.console.domain.InstanceState
 import grails.transaction.Transactional
+import org.apache.activemq.command.ActiveMQObjectMessage
 
+import javax.jms.Message
 import java.text.SimpleDateFormat
 
 @Transactional
@@ -37,8 +40,11 @@ class InstanceService {
             instance.save(failOnError: true, flush: true)
             instances.add(instance)
 
-            def instanceCreationMessage = [regularInstanceId: instance.id]
-            jmsService.send(queue: "awsQueue", instanceCreationMessage)
+            Message message = new ActiveMQObjectMessage();
+            message.setJMSPriority(instance.id);
+            message.setObject([regularInstanceId: instance.id, action: InstanceAction.CREATE.name])
+
+            jmsService.send(queue: "aws_create_queue", message)
         }
         return instances;
     }

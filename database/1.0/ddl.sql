@@ -48,6 +48,7 @@ CREATE TABLE `approved_amis` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `aws_instance_id` varchar(255) NOT NULL,
+  `aws_security_group` varchar(255) NOT NULL,
   `is_workshop` BIT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
@@ -73,28 +74,31 @@ CREATE TABLE `regular_instances` (
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
-
 delete from user_roles;
-delete from roles;
 delete from users;
-delete from purposes;
-delete from instance_types;
-delete from approved_instances;
 
+delete from roles;
 insert into roles values (1, 'ROLE_ADMIN');
 insert into roles values (2, 'ROLE_USER');
 
+delete from purposes;
 insert into purposes values (1, 'Demo');
 insert into purposes values (2, 'PoC');
 insert into purposes values (3, 'Shared');
 insert into purposes values (4, 'Other');
 
-insert into instance_types values (1, 'Small', 't2.mall');
-insert into instance_types values (2, 'Medium', 't2.medium');
-insert into instance_types values (3, 'Large', 'm3.large');
-insert into instance_types values (4, 'Extra Large', 'm3.xlarge');
+delete from instance_types;
+insert into instance_types values (1, 'Micro', 'm1.small');
+insert into instance_types values (2, 'Small', 'm1.medium');
+insert into instance_types values (3, 'Medium', 'm3.medium');
+insert into instance_types values (4, 'Large', 'm3.large');
+insert into instance_types values (5, 'Extra Large', 'm3.xlarge');
 
-insert into approved_amis values (1, 'Mulesoft Solutions Workshop R 4.3.0 - Beta 1', 'ami-2ea4f546', true);
-insert into approved_amis values (2, 'Mulesoft Solutions Workshop R 4.2.2', 'ami-44593e2c', false);
-insert into approved_amis values (3, 'MuleSoft Linux CentOS 6.4 Base Image', 'ami-ee532d87', false);
-insert into approved_amis values (4, 'Demo: Order Entry Showcase Environment', 'ami-5cfe4634', false );
+delete from approved_amis;
+insert into approved_amis (id, name, aws_security_group, aws_instance_id, is_workshop) values (1, 'Mulesoft Solutions Workshop R 4.3.0 - Beta 1', 'Workshop-SecurityGroup', 'ami-2ea4f546', true);
+insert into approved_amis (id, name, aws_security_group, aws_instance_id, is_workshop) values (2, 'Mulesoft Solutions Workshop R 4.2.2', 'Workshop-SecurityGroup', 'ami-44593e2c', false);
+insert into approved_amis (id, name, aws_security_group, aws_instance_id, is_workshop) values (3, 'MuleSoft Linux CentOS 6.4 Base Image', 'Workshop-SecurityGroup', 'ami-ee532d87', false);
+insert into approved_amis (id, name, aws_security_group, aws_instance_id, is_workshop) values (4, 'Demo: Order Entry Showcase Environment', 'Workshop-SecurityGroup', 'ami-5cfe4634', false );
+
+delete from regular_instances;
+insert into regular_instances (id,owner_id,instance_type_id,approved_ami_id,purpose_id,name,description,state,domain,sfdc_url,has_domain,has_eip,date_start,date_stop,date_terminate,date_creation,date_last_modification) values (1,5,1,1,1,'Sandbox:AWS Console','','PENDING',NULL,NULL,false,false,'2015-03-11 00:00:00','2015-03-25 00:00:00','2015-03-25 00:00:00','2015-03-10 19:14:27','2015-03-10 19:14:27');
