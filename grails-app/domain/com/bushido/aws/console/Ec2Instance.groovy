@@ -19,7 +19,14 @@ class Ec2Instance {
     Date   lastModificationDate
 
     static constraints = {
-
+        keyName(nullable: true)
+        platform(nullable: true)
+        nameTag(nullable: true)
+        dueDateTag(nullable: true)
+        ownerTag(nullable: true)
+        purposeTag(nullable: true)
+        creationDateTag(nullable: true)
+        lastModificationDate(nullable: true)
     }
 
     static mapping = {

@@ -3,26 +3,31 @@ package com.bushido.aws.console.services
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.services.ec2.AmazonEC2Client
 import com.amazonaws.services.ec2.model.CreateTagsRequest
+import com.amazonaws.services.ec2.model.DescribeInstanceStatusRequest
+import com.amazonaws.services.ec2.model.DescribeInstanceStatusResult
 import com.amazonaws.services.ec2.model.DescribeInstancesRequest
 import com.amazonaws.services.ec2.model.DescribeInstancesResult
 import com.amazonaws.services.ec2.model.Instance
 import com.amazonaws.services.ec2.model.RunInstancesRequest
 import com.amazonaws.services.ec2.model.RunInstancesResult
 import com.amazonaws.services.ec2.model.Tag
+import com.bushido.aws.console.Ec2Instance
+import com.bushido.aws.console.InstanceMetadata
 import com.bushido.aws.console.RegularInstance
+import com.bushido.aws.console.User
 import com.bushido.aws.console.domain.InstanceState
+import com.google.gson.GsonBuilder
 import grails.transaction.Transactional
 
 import java.text.SimpleDateFormat
 
-@Transactional
 class CloudService {
     def amazonWebService
     def simpleDateFormatter = new SimpleDateFormat("yyyyMMdd");
 
     public Boolean areValidCredentials(String clientId, String clientSecret) {
         try {
-            AmazonEC2Client ec2 = new AmazonEC2Client(new BasicAWSCredentials(clientId, clientSecret))
+            AmazonEC2Client ec2 = createClientWith(clientId, clientSecret)
             ec2.describeAccountAttributes();
             return true;
         } catch (Exception exception) {
@@ -30,20 +35,28 @@ class CloudService {
         }
     }
 
-    public Object createEC2InstanceFrom(RegularInstance instance) {
-        def clientId = instance.owner.awsClientId
-        def clientSecret= instance.owner.awsClientSecret
-        AmazonEC2Client ec2 = new AmazonEC2Client(new BasicAWSCredentials(clientId, clientSecret))
+    public RegularInstance createEC2InstanceFrom(RegularInstance instance) {
+        AmazonEC2Client ec2 = createClientWith(instance.owner.awsClientId, instance.owner.awsClientSecret)
+        Instance createdInstance = null
 
-        def runInstanceRequest = new RunInstancesRequest(
-                imageId: instance.ami.awsInstanceId,
-                minCount: 1,
-                maxCount: 1,
-                instanceType: instance.type.awsInstanceType,
-                securityGroups: Arrays.asList(instance.ami.securityGroup)
-        );
-        RunInstancesResult result = ec2.runInstances(runInstanceRequest);
-        Instance createdInstance = result.reservation.instances.first()
+        if (instance?.instanceMetadata?.awsInstanceId != null && !instance?.instanceMetadata?.awsInstanceId.isEmpty()) {
+            createdInstance = this.getAWSInstanceById(ec2, instance.instanceMetadata.awsInstanceId)
+        } else {
+            def runInstanceRequest = new RunInstancesRequest(
+                    imageId: instance.ami.awsInstanceId,
+                    minCount: 1,
+                    maxCount: 1,
+                    instanceType: instance.type.awsInstanceType,
+                    securityGroups: Arrays.asList(instance.ami.securityGroup)
+            );
+            RunInstancesResult result = ec2.runInstances(runInstanceRequest);
+            createdInstance = result.reservation.instances.first()
+        }
+
+        def instanceMetadata = new InstanceMetadata(awsInstanceId: createdInstance.instanceId).save(flush: true, failOnError: true)
+        instance.instanceMetadata = instanceMetadata
+        instance.save(flush: true, failOnError: true)
+
 
         // add the tags to the instance
         def createTagRequest = new CreateTagsRequest(
@@ -63,20 +76,67 @@ class CloudService {
         def waits = 0;
 
         while (!done && (waits < maxWaits)) {
-            def describeInstanceRequest = new DescribeInstancesRequest(instanceIds: Arrays.asList(createdInstance.instanceId))
-            DescribeInstancesResult instanceResult = ec2.describeInstances(describeInstanceRequest)
-            def recentInstanceStatus = instanceResult.reservations.first().instances.first()
-            if (recentInstanceStatus.state.name.equalsIgnoreCase(InstanceState.RUNNING.name)) {
-                done = true
+            def describeInstanceRequest = new DescribeInstanceStatusRequest(instanceIds: Arrays.asList(createdInstance.instanceId))
+            DescribeInstanceStatusResult instanceResult = ec2.describeInstanceStatus(describeInstanceRequest)
 
-                // we have the instance running
-                // FIXME: terminar
+            def containsStatus = instanceResult.instanceStatuses.isEmpty()
+            def isFullyCreated = !containsStatus
+            if (isFullyCreated) {
+                def recentInstanceStatus = instanceResult.instanceStatuses.first()
+                isFullyCreated = recentInstanceStatus.systemStatus.status.equalsIgnoreCase("ok") && recentInstanceStatus.instanceStatus.status.equalsIgnoreCase("ok");
+            }
+
+            if (isFullyCreated) {
+                def awsInstance = this.getAWSInstanceById(ec2, createdInstance.instanceId)
+                this.createEc2Instance(awsInstance)
+
+                instanceMetadata.publicIP = awsInstance.publicIpAddress
+                instanceMetadata.privateIP = awsInstance.privateIpAddress
+                instanceMetadata.internalDNS = awsInstance.publicDnsName
+                instanceMetadata.save(flush: true, failOnError: true)
+
+                instance.state = InstanceState.RUNNING
+                instance.save(flush: true, failOnError: true)
+                done = true
             } else {
                 waits += 1;
-                Thread.sleep(1* 60 * 60)
+                Thread.sleep(2* 60 * 1000)
             }
         }
+        return instance;
+    }
 
-        return true;
+    static AmazonEC2Client createClientWith(String clientId, String clientSecret) {
+        return new AmazonEC2Client(new BasicAWSCredentials(clientId, clientSecret))
+    }
+
+    public Instance getAWSInstanceById(AmazonEC2Client ec2, String instanceId) {
+        def describeInstanceRequest = new DescribeInstancesRequest(instanceIds: Arrays.asList(instanceId))
+        DescribeInstancesResult instanceResult = ec2.describeInstances(describeInstanceRequest)
+        return instanceResult.reservations.first().instances.first()
+    }
+
+    public Ec2Instance createEc2Instance(Instance ec2) {
+        def jsonTransformer = new GsonBuilder().serializeNulls().create()
+
+        def instance = new Ec2Instance (
+            instanceId: ec2.instanceId,
+            amiId: ec2.imageId,
+            state: ec2.state.name.toLowerCase(),
+            keyName: " ",
+            platform: ec2.platform,
+            type: ec2.instanceType,
+            securityGroups: jsonTransformer.toJson(ec2.securityGroups).toLowerCase(),
+            launchTime: ec2.launchTime,
+            lastModificationDate: Calendar.getInstance().getTime(),
+            tags: jsonTransformer.toJson(ec2.tags),
+            nameTag: ec2.tags.find { it.key.toLowerCase().equals("name") }.value,
+            creationDateTag: ec2.tags.find { it.key.toLowerCase().equals("creation") }.value,
+            dueDateTag: ec2.tags.find { it.key.toLowerCase().equals("due") }.value,
+            ownerTag: ec2.tags.find { it.key.toLowerCase().equals("owner") }.value,
+            purposeTag: ec2.tags.find { it.key.toLowerCase().equals("type") }.value,
+        ).save(flush: true, failOnError: true)
+        return instance;
+
     }
 }

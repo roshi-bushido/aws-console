@@ -66,6 +66,7 @@ CREATE TABLE `console_regular_instances` (
   `sfdc_url` varchar(256) NULL,
   `has_domain` BIT NOT NULL DEFAULT 0,
   `has_eip` BIT NOT NULL DEFAULT 0,
+  `instance_metadata_id` BIGINT(20),
   `date_start` DATETIME NOT NULL,
   `date_stop` DATETIME NOT NULL,
   `date_terminate` DATETIME,
@@ -73,6 +74,16 @@ CREATE TABLE `console_regular_instances` (
   `date_last_modification` DATETIME NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
+
+CREATE TABLE `console_instance_metadata` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `aws_instance_id` varchar(50) NOT NULL,
+  `public_ip_address` varchar(50),
+  `private_ip_address` varchar(50),
+  `internal_dns` varchar(100),
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
+
 
 delete from console_user_roles;
 delete from console_users;
@@ -101,4 +112,4 @@ insert into console_approved_amis (id, name, aws_security_group, aws_instance_id
 insert into console_approved_amis (id, name, aws_security_group, aws_instance_id, is_workshop) values (4, 'Demo: Order Entry Showcase Environment', 'Workshop-SecurityGroup', 'ami-5cfe4634', false );
 
 delete from console_regular_instances;
-insert into console_regular_instances (id,owner_id,instance_type_id,approved_ami_id,purpose_id,name,description,state,domain,sfdc_url,has_domain,has_eip,date_start,date_stop,date_terminate,date_creation,date_last_modification) values (1,5,1,1,1,'Sandbox:AWS Console','','PENDING',NULL,NULL,false,false,'2015-03-11 00:00:00','2015-03-25 00:00:00','2015-03-25 00:00:00','2015-03-10 19:14:27','2015-03-10 19:14:27');
+insert into console_regular_instances (id,owner_id,instance_type_id,approved_ami_id,purpose_id,name,description,state,domain,sfdc_url,has_domain,has_eip,instance_metadata_id,date_start,date_stop,date_terminate,date_creation,date_last_modification) values (1,1,1,1,1,'Sandbox:AWS Console','','PENDING',NULL,NULL,false,false,NULL,'2015-03-11 00:00:00','2015-03-25 00:00:00','2015-03-25 00:00:00','2015-03-10 19:14:27','2015-03-10 19:14:27');

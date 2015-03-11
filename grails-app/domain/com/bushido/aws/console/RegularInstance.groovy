@@ -8,6 +8,7 @@ class RegularInstance {
     ApprovedAMI ami
     User owner
     InstanceState state
+    InstanceMetadata instanceMetadata
 
     String name
     String description
@@ -41,6 +42,7 @@ class RegularInstance {
         terminationDate(nullable: false)
         dateCreated(nullable: true)
         lastUpdated(nullable: true)
+        instanceMetadata(nullable: true)
     }
 
     static mapping = {
@@ -58,6 +60,7 @@ class RegularInstance {
         state(column: 'state')
         description(column: 'description')
         sfdcOpportunityLink(column: 'sfdc_url')
+        instanceMetadata(column: 'instance_metadata_id')
         startingDate(column: 'date_start')
         endingDate(column: 'date_stop')
         terminationDate(column: 'date_terminate')
