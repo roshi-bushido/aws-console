@@ -20,7 +20,7 @@ environments {
             username = "root"
             password = ""
             dbCreate = "validate" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://localhost:3306/aws_console"
+            url = "jdbc:mysql://localhost:3306/aws_monitoring"
         }
     }
     test {
@@ -28,7 +28,7 @@ environments {
             username = "root"
             password = ""
             dbCreate = "validate" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://localhost:3306/aws_console"
+            url = "jdbc:mysql://localhost:3306/aws_monitoring"
         }
     }
     production {

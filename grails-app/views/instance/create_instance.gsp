@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <link rel="stylesheet" href="${resource(dir: 'plugins', file: 'sky-forms/version-2.0.1/css/custom-sky-forms.css')}">
+    <link rel="stylesheet" href="${resource(dir: 'ui-plugins', file: 'sky-forms/version-2.0.1/css/custom-sky-forms.css')}">
 </head>
 
 <body>

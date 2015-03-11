@@ -10,7 +10,7 @@ class InstanceType {
     }
 
     static mapping = {
-        table("instance_types")
+        table("console_instance_types")
         cache true
         version false
         name column: 'name', unique: true, length: 255

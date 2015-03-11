@@ -17,13 +17,13 @@ class User {
 	}
 
 	static mapping = {
-        table("users")
+        table("console_users")
         version false
         username            column: 'username'
         awsClientId         column: 'aws_client_id'
         awsClientSecret     column: 'aws_client_secret'
         hasAWSConfiguration column: 'has_aws_configuration'
-        roles               lazy: false,  joinTable: [name: "user_roles", key: "user_id", column: "role_id"]
+        roles               lazy: false,  joinTable: [name: "console_user_roles", key: "user_id", column: "role_id"]
 	}
 
     def isAdmin() {

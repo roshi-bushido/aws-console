@@ -44,7 +44,7 @@ class RegularInstance {
     }
 
     static mapping = {
-        table(name: 'regular_instances')
+        table(name: 'console_regular_instances')
         version(false)
         cache(true)
         purpose(column: 'purpose_id')

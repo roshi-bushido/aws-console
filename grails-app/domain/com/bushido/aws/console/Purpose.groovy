@@ -8,7 +8,7 @@ class Purpose {
     }
 
     static mapping = {
-        table("purposes")
+        table("console_purposes")
         cache true
         version false
         name column: 'name', unique: true

@@ -14,7 +14,7 @@ class ApprovedAMI {
     }
 
     static mapping = {
-        table("approved_amis")
+        table("console_approved_amis")
         cache true
         version false
         name column: 'name', unique: true

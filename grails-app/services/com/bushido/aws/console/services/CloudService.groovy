@@ -62,12 +62,15 @@ class CloudService {
         def maxWaits = 10;
         def waits = 0;
 
-        while (!done && (maxWaits < waits)) {
+        while (!done && (waits < maxWaits)) {
             def describeInstanceRequest = new DescribeInstancesRequest(instanceIds: Arrays.asList(createdInstance.instanceId))
             DescribeInstancesResult instanceResult = ec2.describeInstances(describeInstanceRequest)
             def recentInstanceStatus = instanceResult.reservations.first().instances.first()
-            if (!recentInstanceStatus.state.name.equalsIgnoreCase(InstanceState.RUNNING.name)) {
+            if (recentInstanceStatus.state.name.equalsIgnoreCase(InstanceState.RUNNING.name)) {
                 done = true
+
+                // we have the instance running
+                // FIXME: terminar
             } else {
                 waits += 1;
                 Thread.sleep(1* 60 * 60)

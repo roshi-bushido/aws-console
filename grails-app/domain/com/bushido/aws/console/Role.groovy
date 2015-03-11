@@ -4,7 +4,7 @@ class Role {
 	String name
 
 	static mapping = {
-        table("roles")
+        table("console_roles")
 		cache true
         version false
         name column: 'name', unique: true

@@ -21,8 +21,8 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'custom.css')}">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'application.css')}">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'themes/dark-blue.css')}">
-    <link rel="stylesheet" href="${resource(dir: 'plugins', file: 'bootstrap/css/bootstrap.min.css')}">
-    <link rel="stylesheet" href="${resource(dir: 'plugins', file: 'font-awesome/css/font-awesome.css')}">
+    <link rel="stylesheet" href="${resource(dir: 'ui-plugins', file: 'bootstrap/css/bootstrap.min.css')}">
+    <link rel="stylesheet" href="${resource(dir: 'ui-plugins', file: 'font-awesome/css/font-awesome.css')}">
     <script type="text/javascript" src="${resource(dir: 'js', file:'jquery-2.1.1.js')}"></script>
     <g:layoutHead/>
 </head>
@@ -182,8 +182,8 @@
 <!--=== End Copyright ===-->
 </div><!--/wrapper-->
 
-<script type="text/javascript" src="${resource(dir: 'plugins', file:'jquery-migrate-1.2.1.min.js')}"></script>
-<script type="text/javascript" src="${resource(dir: 'plugins', file:'bootstrap/js/bootstrap.min.js')}"></script>
+<script type="text/javascript" src="${resource(dir: 'ui-plugins', file:'jquery-migrate-1.2.1.min.js')}"></script>
+<script type="text/javascript" src="${resource(dir: 'ui-plugins', file:'bootstrap/js/bootstrap.min.js')}"></script>
 <script type="text/javascript" src="${resource(dir: 'js', file:'app.js')}"></script>
 
 <!--[if lt IE 9]>
