@@ -15,7 +15,7 @@ import static org.junit.Assert.assertThat
 class CloudServiceTest extends IntegrationSpec {
     def cloudService
 
-    @Ignore
+
     def "should create an aws instance" () {
         given:
             def regularInstance = RegularInstance.load(1)
