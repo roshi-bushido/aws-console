@@ -41,7 +41,7 @@ class InstanceService {
             instances.add(instance)
 
             Message message = new ActiveMQObjectMessage();
-            message.setJMSPriority(instance.id);
+            message.setJMSPriority(instance.id.intValue());
             message.setObject([regularInstanceId: instance.id, action: InstanceAction.CREATE.name])
 
             jmsService.send(queue: "aws_create_queue", message)

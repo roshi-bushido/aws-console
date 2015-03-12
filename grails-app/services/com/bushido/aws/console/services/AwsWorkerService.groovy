@@ -8,11 +8,13 @@ class AwsWorkerService {
 
     def cloudService
 
-//    @Queue(name = "aws_create_queue")
-//    def createInstance(message) {
+    @Queue(name = "aws_create_queue")
+    def createInstance(message) {
 //        def regularInstance = RegularInstance.load(message.regularInstanceId)
 //        this.cloudService.createEC2InstanceFrom(regularInstance)
-//        print(message)
-//    }
+        def date = Calendar.getInstance().getTime().toString()
+        print("$date $message")
+        throw new RuntimeException("Test Error")
+    }
 }
 
